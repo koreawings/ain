@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 할 일 목록 (Next.js + Supabase + Vercel)
 
-## Getting Started
+로그인 화면 없이 쓰는 TODO 앱입니다. 브라우저마다 Supabase 익명 사용자로 자동 로그인하고,
+RLS(행 단위 보안)로 각자 자기 할 일만 보고 수정할 수 있습니다.
 
-First, run the development server:
+## 1. Supabase 설정
+1. https://supabase.com 에서 새 프로젝트를 만듭니다.
+2. **SQL Editor**에 `supabase/schema.sql` 내용을 붙여넣고 **Run**을 누릅니다.
+3. **Authentication → Sign In / Providers**에서 **Allow anonymous sign-ins**를 켭니다.
+4. **Project Settings → API**에서 `Project URL`과 `anon public` 키를 복사합니다.
 
+## 2. Vercel 배포
+1. 이 저장소를 GitHub에 올립니다.
+2. https://vercel.com/new 에서 저장소를 Import 합니다.
+3. **Environment Variables**에 다음 두 값을 넣고 **Deploy**를 누릅니다.
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+이후 GitHub에 push할 때마다 자동으로 다시 배포됩니다.
+
+## 로컬 실행 (선택)
 ```bash
+cp .env.example .env.local   # 값 채우기
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
